@@ -11,7 +11,7 @@ This is the existing Deccan Table application exported as static HTML, JavaScrip
 5. Open **Actions > Deploy Deccan Table to GitHub Pages > Run workflow**, or push a new commit to `main`.
 6. After the build and deployment jobs succeed, open **https://YOUR_USERNAME.github.io/deccan-table-demo/**. GitHub also shows the deployed URL on Settings > Pages and in the `github-pages` environment.
 
-The workflow installs the lockfile dependencies with `npm ci`, checks TypeScript and ESLint, runs the tests, builds the static export, uploads `out` and deploys it using GitHub's official Pages actions. Its deploy job uses only `pages: write` and `id-token: write`; no personal access token or repository secret is required. If your organization restricts Actions or environments, permit this workflow and its `github-pages` environment in your repository settings.
+The workflow installs the lockfile dependencies with `npm ci`, checks TypeScript and ESLint, runs the tests, builds the static export, uploads `out` and deploys it using GitHub's official Pages actions. The workflow grants `contents: read`, `pages: write` and `id-token: write` to its jobs. After manually enabling Pages, no personal access token or repository secret is required. If your organization restricts Actions or environments, permit this workflow and its `github-pages` environment in your repository settings.
 
 Do not upload `out` manually or use `next start`. No deployment has been performed from this workspace; the included workflow runs after you push the project to your GitHub repository.
 
@@ -86,3 +86,21 @@ Official references:
 - https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
 - https://nextjs.org/docs/app/guides/static-exports
 - https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath
+
+## Fixing `Get Pages site failed` / HTTP 404
+
+A successful application build does not automatically create a GitHub Pages site. The normal setup requires a repository administrator to open **Settings > Pages** and select **GitHub Actions** under **Build and deployment > Source**, then rerun the workflow. For GitHub Free, use a public repository. Confirm the repository is named `deccan-table-demo` and the workflow is on `main` (or adjust its branch filter).
+
+The workflow now grants `contents: read`, `pages: write` and `id-token: write` without job-level overrides that reduce them. If an organization policy blocks Pages, official Actions, or the `github-pages` environment, an administrator must allow them. If the environment requires approval or restricts deployment branches, approve the deployment or allow `main` under **Settings > Environments > github-pages**.
+
+### Optional automatic initialization
+
+`actions/configure-pages@v5` explicitly documents that its `enablement` option needs a token **other than `GITHUB_TOKEN`** to create a Pages site. Setting `enablement: true` with the default token alone is therefore not a reliable fix.
+
+If you want the workflow to initialize Pages automatically, add an authorized setup token as a repository Actions secret named **PAGES_SETUP_TOKEN** under **Settings > Secrets and variables > Actions**. Scope it to this repository and grant the permissions required to create a Pages site: a suitable classic PAT with `repo` scope, or a suitable fine-grained/GitHub App token with Pages write and Administration write permissions. The account or app must be authorized to manage the repository's Pages settings. Do not put the token in a file or commit it.
+
+When this secret is present, the existing workflow passes it to `configure-pages` and evaluates `enablement` to **true**. When absent, it uses `github.token` and leaves initialization off; manually enable Pages as described above. Actual deployment always uses the workflow's normal GitHub token. You do not need to create this secret if you use manual setup.
+
+This workspace change does not modify your live GitHub repository settings or trigger deployment. Push the updated workflow, enable Pages manually or provide the optional setup secret, and rerun **Actions > Deploy Deccan Table to GitHub Pages**.
+
+Action's enablement/token contract: https://github.com/actions/configure-pages/blob/v5/action.yml

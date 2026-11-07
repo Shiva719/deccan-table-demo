@@ -5,14 +5,13 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  pages: write
+  id-token: write
 concurrency:
   group: github-pages
   cancel-in-progress: false
 jobs:
   build:
-    permissions:
-      contents: read
-      pages: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,7 +19,14 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - uses: actions/configure-pages@v5
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          # GITHUB_TOKEN can deploy an enabled site, but cannot initialize Pages.
+          # With no setup secret, enable Settings > Pages > GitHub Actions first.
+          # An optional admin-capable setup token enables automatic initialization.
+          token: ${{ secrets.PAGES_SETUP_TOKEN || github.token }}
+          enablement: ${{ secrets.PAGES_SETUP_TOKEN != '' }}
       - run: npm ci
       - run: npm run typecheck
       - run: npm run lint
@@ -32,9 +38,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
