@@ -1,0 +1,201 @@
+[
+  {
+    "file": "File:Alfredo Web.jpg",
+    "info": {
+      "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Alfredo_Web.jpg/500px-Alfredo_Web.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "thumbwidth": 500,
+      "thumbheight": 333,
+      "responsiveUrls": {
+        "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Alfredo_Web.jpg/1280px-Alfredo_Web.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+      },
+      "thumbattribs": {
+        "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Alfredo_Web.jpg/500px-Alfredo_Web.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "decoding": "async",
+        "loading": "lazy",
+        "width": 500,
+        "height": 333,
+        "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Alfredo_Web.jpg/1280px-Alfredo_Web.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+      },
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Alfredo_Web.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Alfredo_Web.jpg",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=74703865",
+      "extmetadata": {
+        "DateTime": {
+          "value": "2018-11-27 16:13:16",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Alfredo Web",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Self-published work|Unidentified men|Dirigenti d'azienda italiani|Nati a Penne|Nati nel 1970",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Alfredo Palma nel 2017",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2017-09-06",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Alfredo.palma&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Alfredo.palma (page does not exist)\">Alfredo.palma</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    }
+  },
+  {
+    "file": "File:Chicken penne alfredo.JPG",
+    "info": {
+      "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Chicken_penne_alfredo.JPG/500px-Chicken_penne_alfredo.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "thumbwidth": 500,
+      "thumbheight": 375,
+      "responsiveUrls": {
+        "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Chicken_penne_alfredo.JPG/1280px-Chicken_penne_alfredo.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+      },
+      "thumbattribs": {
+        "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Chicken_penne_alfredo.JPG/500px-Chicken_penne_alfredo.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "decoding": "async",
+        "loading": "lazy",
+        "width": 500,
+        "height": 375,
+        "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Chicken_penne_alfredo.JPG/1280px-Chicken_penne_alfredo.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+      },
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Chicken_penne_alfredo.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Chicken_penne_alfredo.JPG",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=5626090",
+      "extmetadata": {
+        "DateTime": {
+          "value": "2009-01-03 01:05:24",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Chicken penne alfredo",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "GFDL|Taken with Fujifilm FinePix A340|Retouched pictures|CC-BY-SA-3.0,2.5,2.0,1.0|License migration redundant|Self-published work|Photos by User:BrokenSphere|Pasta dishes of the United States|Penne rigate dishes|Chicken Alfredo",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Oven-baked chicken penne alfredo, purchased from Costco.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2008-01-24",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:BrokenSphere\" title=\"User:BrokenSphere\">BrokenSphere</a>",
+          "source": "commons-desc-page"
+        },
+        "Permission": {
+          "value": "You may select the license of your choice.",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-3.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#171d18">
+<title>The Deccan Table | Digital Menu</title>
+<style>
+:root{--forest:#17251d;--forest2:#23382b;--gold:#d6a45d;--gold2:#f0c982;--cream:#fbf7ef;--paper:#fffdf8;--ink:#28271f;--muted:#77766d;--line:#e9e1d3;--red:#a84d38;--green:#477553;--shadow:0 18px 55px #17251d14}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #4f91dc;outline-offset:3px}.wrap{max-width:1120px;margin:auto;padding:0 22px}
+.topbar{background:var(--forest);color:#f8f1e5;font-size:12px;letter-spacing:.08em;text-align:center;padding:9px 14px}
+header{background:var(--forest);color:white;position:relative;overflow:hidden}
+header:before,header:after{content:"";position:absolute;border:1px solid #d6a45d30;border-radius:50%;width:340px;height:340px;pointer-events:none}
+header:before{right:-120px;top:-230px}header:after{left:-210px;bottom:-280px}
+.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:15px;position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:12px}.brandmark{width:44px;height:44px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font-size:22px}
+.brandname{font:700 18px Georgia,serif;letter-spacing:.07em}.brandtag{font-size:10px;color:#d9bb8d;letter-spacing:.18em;margin-top:4px}
+.navright{display:flex;align-items:center;gap:10px}.open-pill{border:1px solid #6d8a70;color:#d7ead8;border-radius:30px;padding:8px 12px;font-size:12px}.cart-shortcut{border:0;border-radius:30px;background:var(--gold);color:#211c13;padding:10px 15px;font-weight:800}
+.hero{padding:38px 0 35px;position:relative;z-index:1}.eyebrow{color:var(--gold2);font-size:11px;letter-spacing:.2em;font-weight:800}.hero h1{font:700 clamp(32px,5vw,54px)/1.05 Georgia,serif;max-width:650px;margin:12px 0}.hero h1 em{color:var(--gold2);font-weight:400}.hero p{color:#d7d5c9;max-width:540px;line-height:1.7;margin:0}.hero-meta{display:flex;gap:20px;flex-wrap:wrap;margin-top:22px;color:#e8ddc9;font-size:12px}.hero-meta span{display:flex;align-items:center;gap:7px}
+.main{padding-top:26px;padding-bottom:130px}.toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}.searchbox{flex:1;min-width:210px;max-width:420px;position:relative}.searchbox input{width:100%;border:1px solid var(--line);border-radius:14px;background:var(--paper);padding:13px 15px 13px 42px;color:var(--ink)}.search-icon{position:absolute;left:15px;top:12px;color:var(--muted)}.filter-note{font-size:12px;color:var(--muted)}
+.categories{display:flex;gap:9px;overflow:auto;padding:4px 0 17px;scrollbar-width:none}.categories::-webkit-scrollbar{display:none}.cat{white-space:nowrap;border:1px solid var(--line);border-radius:30px;background:var(--paper);padding:10px 16px;color:#625c50;font-size:13px;font-weight:700;transition:.2s}.cat.active{background:var(--forest);border-color:var(--forest);color:white;box-shadow:0 5px 14px #17251d22}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:10px 0 15px}.section-head h2{font:700 27px Georgia,serif;margin:0}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}.count-label{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.dish{background:var(--paper);border:1px solid var(--line);border-radius:19px;overflow:hidden;box-shadow:0 4px 18px #38271808;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}.dish:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.dish-photo{height:185px;position:relative;background:linear-gradient(135deg,#f3e5cf,#e4cba8);overflow:hidden}.dish-photo img{width:100%;height:100%;object-fit:cover;display:block}.dish-photo .photo-placeholder{height:100%;display:grid;place-items:center;font-size:65px;background:radial-gradient(circle at 50% 42%,#fff8e9 0 29%,transparent 30%),linear-gradient(135deg,#f4e6d2,#dfc39b)}.tag{position:absolute;top:12px;left:12px;background:#fffaf0eF;color:#5b472b;border-radius:30px;padding:6px 10px;font-size:10px;font-weight:800;letter-spacing:.06em}.veg-dot{display:inline-block;width:9px;height:9px;border:1.5px solid #36814c;position:relative;margin-right:5px;vertical-align:middle}.veg-dot:after{content:"";position:absolute;width:4px;height:4px;border-radius:50%;background:#36814c;left:1px;top:1px}
+.dish-body{padding:14px;display:flex;flex-direction:column;flex:1}.dish-title-row{display:flex;justify-content:space-between;gap:8px;align-items:start}.dish h3{font-size:16px;line-height:1.25;margin:0;font-weight:800}.price{font-weight:850;color:#805326;white-space:nowrap}.dish-desc{font-size:12px;line-height:1.5;color:var(--muted);margin:8px 0 13px;min-height:36px}.dish-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}.details{border:0;background:none;color:#8a602e;font-size:12px;font-weight:750;padding:8px 0}.add{border:0;border-radius:10px;background:var(--forest);color:white;padding:10px 14px;font-size:12px;font-weight:850;min-width:78px}.add:hover,.primary:hover{background:var(--forest2)}.stepper{display:flex;align-items:center;border:1px solid #d9c6a7;border-radius:10px;overflow:hidden;background:#fff}.stepper button{width:30px;height:34px;border:0;background:#fff;color:var(--forest);font-size:20px;font-weight:800}.stepper b{min-width:23px;text-align:center;font-size:13px}
+.empty{grid-column:1/-1;text-align:center;padding:48px 15px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:18px}.empty strong{display:block;font:700 22px Georgia,serif;color:var(--ink);margin-bottom:6px}
+.notice{margin-top:24px;background:#f1e9dc;border:1px solid #e5d7c3;border-radius:14px;padding:14px 16px;color:#665644;font-size:12px;line-height:1.6}
+.bottom-cart{position:fixed;z-index:15;bottom:0;left:0;right:0;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:#fffdf8ed;backdrop-filter:blur(12px);border-top:1px solid var(--line);display:none}.bottom-inner{max-width:720px;margin:auto}.primary{width:100%;border:0;border-radius:14px;background:var(--forest);color:white;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;font-weight:850;box-shadow:0 7px 20px #17251d20}.primary small{display:block;font-weight:500;opacity:.75;font-size:11px;margin-top:3px}.primary .amount{font-size:17px}
+.view{display:none;min-height:65vh}.view.active{display:block}.back{border:0;background:none;color:#79562f;font-weight:800;padding:18px 0}.checkout-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px}.panel h2{font:700 29px Georgia,serif;margin:0 0 18px}.order-row{display:flex;justify-content:space-between;gap:10px;padding:13px 0;border-bottom:1px solid var(--line);font-size:14px}.order-row small{display:block;color:var(--muted);margin-top:4px}.grand{display:flex;justify-content:space-between;font-weight:900;font-size:20px;padding:18px 0}.pay-choice{display:flex;gap:10px;align-items:center;border:1px solid var(--line);padding:14px;border-radius:12px;margin:10px 0;font-size:13px;font-weight:700}.pay-choice input{accent-color:var(--forest)}.muted{color:var(--muted);font-size:12px;line-height:1.6}.field{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;margin:7px 0 12px;background:#fff}.success{text-align:center;max-width:560px;margin:45px auto;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:38px 24px;box-shadow:var(--shadow)}.success-icon{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:#e6f0e5;color:#3e794c;font-size:35px;margin:0 auto 15px}.token{font:700 32px Georgia,serif;color:#8c5b28;margin:15px}
+.modal{position:fixed;inset:0;background:#10150fc4;z-index:30;display:none;align-items:end;justify-content:center;padding:18px}.modal.open{display:flex}.modal-card{width:min(540px,100%);background:var(--paper);border-radius:22px;padding:24px;box-shadow:0 20px 80px #0004;position:relative}.modal-card h3{font:700 25px Georgia,serif;margin:0 36px 8px 0}.modal-card p{line-height:1.65;color:var(--muted);font-size:14px}.close{position:absolute;right:16px;top:16px;width:34px;height:34px;border:0;border-radius:50%;background:#f0e8dc;font-size:20px}
+footer{background:var(--forest);color:#ddd4c5;padding:25px 0;text-align:center;font-size:12px;line-height:1.8}footer strong{font:700 18px Georgia,serif;color:var(--gold2);letter-spacing:.08em}
+@media(min-width:760px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.dish-photo{height:190px}.main{padding-top:34px}}
+@media(max-width:620px){.wrap{padding:0 16px}.nav{height:70px}.brandname{font-size:15px}.open-pill{display:none}.hero{padding:30px 0}.hero h1{font-size:37px}.grid{gap:11px}.dish{border-radius:15px}.dish-photo{height:135px}.dish-body{padding:11px}.dish h3{font-size:14px}.dish-desc{font-size:11px;min-height:48px}.price{font-size:13px}.add{min-width:0;padding:9px 10px}.details{font-size:11px}.checkout-layout{grid-template-columns:1fr}.section-head h2{font-size:24px}}
+@media(max-width:360px){.grid{grid-template-columns:1fr}.dish{display:grid;grid-template-columns:112px 1fr}.dish-photo{height:100%;min-height:150px}.dish-desc{min-height:0}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="topbar">A LITTLE TASTE OF HYDERABAD · MADE FRESH, SERVED WITH HEART</div>
+<header>
+ <div class="wrap">
+  <div class="nav">
+   <div class="brand"><div class="brandmark">♨</div><div><div class="brandname">THE DECCAN TABLE</div><div class="brandtag">A TASTE OF HYDERABAD</div></div></div>
+   <div class="navright"><span class="open-pill">● DEMO MENU · OPEN</span><button class="cart-shortcut" onclick="goCheckout()">🛍 <span id="navCount">0</span></button></div>
+  </div>
+  <section class="hero">
+   <div class="eyebrow">GOOD FOOD. GOOD MOOD.</div>
+   <h1>Discover your next <em>favourite.</em></h1>
+   <p>From South Indian comfort classics to flavour-packed favourites, find something wonderful on our menu.</p>
+   <div class="hero-meta"><span>✦ Freshly prepared</span><span>✦ Made to order</span><span>✦ Veg & non-veg options</span></div>
+  </section>
+ </div>
+</header>
+<main class="wrap main">
+ <section id="menuView" class="view active">
+  <div class="toolbar">
+   <div class="searchbox"><span class="search-icon">⌕</span><input id="search" type="search" placeholder="Search dishes, e.g. dosa..." oninput="render()" aria-label="Search menu"></div>
+   <span class="filter-note">Explore the menu below</span>
+  </div>
+  <nav class="categories" id="categories" aria-label="Menu categories"></nav>
+  <div class="section-head"><div><h2 id="sectionTitle">All-time favourites</h2><p>Choose your cravings. We’ll take care of the rest.</p></div><span class="count-label" id="dishCount"></span></div>
+  <div class="grid" id="dishGrid"></div>
+  <div class="notice">✨ <strong>Demo experience:</strong> Prices and dishes are sample content. Replace them with your restaurant’s confirmed menu and food photographs before publishing. No real payment is processed.</div>
+ </section>
+ <section id="checkoutView" class="view">
+  <button class="back" onclick="showView('menu')">← Back to menu</button>
+  <div class="checkout-layout">
+   <div class="panel"><h2>Your order</h2><div id="orderItems"></div><div class="grand"><span>Total</span><span id="orderTotal">₹0</span></div><p class="muted">Taxes, packaging and delivery charges are not included in this demo.</p></div>
+   <div class="panel"><h2>Almost there!</h2><label class="muted" for="guestName">Your name</label><input class="field" id="guestName" placeholder="Enter your name"><label class="muted" for="tableNo">Table number (optional)</label><input class="field" id="tableNo" placeholder="e.g. 04"><div style="font-weight:800;margin:12px 0 8px">Payment preference</div><label class="pay-choice"><input type="radio" name="payment" value="counter" checked> Pay at counter</label><label class="pay-choice"><input type="radio" name="payment" value="online"> Online payment preview</label><p class="muted">Online payment is only a preview. This demo does not collect payment details.</p><button class="primary" onclick="placeOrder()"><span>Place demo order</span><span>→</span></button></div>
+  </div>
+ </section>
+ <section id="successView" class="view">
+  <div class="success"><div class="success-icon">✓</div><div class="eyebrow" style="color:#8c5b28">THANK YOU</div><h2 style="font:700 30px Georgia,serif;margin:8px 0">Your order is in!</h2><p class="muted" id="successMessage">Your demo order has been received.</p><div class="token" id="orderToken">#DT-000001</div><p class="muted">This is a sample confirmation. No kitchen ticket or payment is sent.</p><button class="primary" onclick="resetMenu()"><span>Explore menu again</span><span>↗</span></button></div>
+ </section>
+</main>
+<div class="bottom-cart" id="bottomCart"><div class="bottom-inner"><button class="primary" onclick="goCheckout()"><span><span id="cartLabel">View your cart</span><small>Ready when you are</small></span><span class="amount" id="cartAmount">₹0 →</span></button></div></div>
+<div class="modal" id="dishModal" onclick="if(event.target===this)closeModal()"><div class="modal-card"><button class="close" onclick="closeModal()" aria-label="Close">×</button><div class="eyebrow" style="color:#93652e">FROM OUR MENU</div><h3 id="modalTitle"></h3><p id="modalDesc"></p><div style="display:flex;justify-content:space-between;align-items:center;gap:15px"><strong id="modalPrice" style="font-size:20px"></strong><button class="add" id="modalAdd">+ Add to order</button></div></div></div>
+<footer><div class="wrap"><strong>THE DECCAN TABLE</strong><br>Good food brings people together.<br>Digital menu demo · Crafted with care</div></footer>
+<script>
+const dishes=[
+{id:"dosa",name:"Masala Dosa",price:70,cat:"South Indian",desc:"Crispy fermented rice crepe filled with spiced potatoes. Served with chutney and sambar.",emoji:"🥞",tag:"Bestseller",img:"https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=700&q=80"},
+{id:"idli",name:"Steamed Idli",price:40,cat:"South Indian",desc:"Soft, fluffy steamed rice and lentil cakes served with chutney and sambar.",emoji:"🍚",tag:"Light & lovely",img:"https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=700&q=80"},
+{id:"podi",name:"Ghee Karam Podi Idli",price:85,cat:"South Indian",desc:"Soft idlis tossed in ghee and Andhra spicy lentil podi. Medium spicy.",emoji:"🍘",tag:"Andhra special"},
+{id:"uttapam",name:"Onion Uttapam",price:75,cat:"South Indian",desc:"A thick savoury pancake topped with onion, green chilli and coriander.",emoji:"🥞"},
+{id:"pizza",name:"Margherita Pizza",price:229,cat:"Continental",desc:"Classic thin-crust pizza with tomato, mozzarella and basil.",emoji:"🍕",img:"https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=700&q=80"},
+{id:"alfredo",name:"Creamy Alfredo Pasta",price:219,cat:"Continental",desc:"Penne pasta in a creamy garlic and parmesan-style sauce.",emoji:"🍝"},
+{id:"arrabbiata",name:"Penne Arrabbiata",price:199,cat:"Continental",desc:"Penne pasta in a tangy, spicy tomato and garlic sauce.",emoji:"🍝"},
+{id:"burger",name:"Crispy Veg Burger",price:149,cat:"Continental",desc:"Golden crispy vegetable patty with lettuce, cheese and signature sauce.",emoji:"🍔",img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=80"},
+{id:"garlicbread",name:"Cheesy Garlic Bread",price:129,cat:"Continental",desc:"Toasted bread topped with garlic butter, herbs and melted cheese.",emoji:"🥖"},
+{id:"salad",name:"Mediterranean Salad",price:179,cat:"Continental",desc:"Fresh vegetables, olives and herbs with a light lemon dressing.",emoji:"🥗"},
+{id:"hakka",name:"Veg Hakka Noodles",price:159,cat:"Chinese",desc:"Stir-fried noodles with crunchy vegetables and Indo-Chinese seasoning.",emoji:"🍜",tag:"Popular"},
+{id:"manchurian",name:"Veg Manchurian",price:169,cat:"Chinese",desc:"Vegetable dumplings tossed in a savoury garlic-soy sauce.",emoji:"🥢"},
+{id:"friedrice",name:"Schezwan Fried Rice",price:169,cat:"Chinese",desc:"Wok-tossed rice with vegetables and spicy Schezwan sauce.",emoji:"🍛"},
+{id:"chillipaneer",name:"Chilli Paneer",price:199,cat:"Chinese",desc:"Paneer cubes tossed with bell peppers, chilli, garlic and soy sauce.",emoji:"🧀"},
+{id:"paneer",name:"Paneer Butter Masala",price:229,cat:"North Indian",desc:"Soft paneer cubes in a rich, mildly spiced tomato-butter gravy.",emoji:"🍛",tag:"Comfort food"},
+{id:"naan",name:"Butter Naan",price:55,cat:"North Indian",desc:"Soft tandoor-style flatbread brushed with butter.",emoji:"🫓"},
+{id:"dal",name:"Dal Tadka",price:159,cat:"North Indian",desc:"Yellow lentils tempered with cumin, garlic and aromatic spices.",emoji:"🥣"},
+{id:"chole",name:"Chole Masala",price:179,cat:"North Indian",desc:"Chickpeas simmered in a bold onion-tomato gravy.",emoji:"🍲"},
+{id:"vegbiryani",name:"Hyderabadi Veg Biryani",price:199,cat:"Biryani & Rice",desc:"Aromatic basmati rice cooked with vegetables and biryani spices.",emoji:"🍚",tag:"House favourite"},
+{id:"chickenbiryani",name:"Hyderabadi Chicken Biryani",price:279,cat:"Biryani & Rice",desc:"Fragrant layered basmati rice with spiced chicken.",emoji:"🍗"},
+{id:"jeerarice",name:"Jeera Rice",price:129,cat:"Biryani & Rice",desc:"Steamed basmati rice tossed with cumin and ghee.",emoji:"🍚"},
+{id:"punugulu",name:"Andhra Punugulu",price:65,cat:"Snacks",desc:"Crispy fermented-batter fritters served with chutney.",emoji:"🧆"},
+{id:"fries",name:"Peri Peri Fries",price:119,cat:"Snacks",desc:"Crispy fries coated with a tangy and mildly spicy seasoning.",emoji:"🍟"},
+{id:"sandwich",name:"Grilled Cheese Sandwich",price:129,cat:"Snacks",desc:"Golden toasted sandwich with melted cheese and herbs.",emoji:"🥪"},
+{id:"chai",name:"Irani Chai",price:30,cat:"Beverages",desc:"Rich Hyderabadi-style slow-brewed milk tea.",emoji:"☕",tag:"Local classic"},
+{id:"coffee",name:"Cold Coffee",price:109,cat:"Beverages",desc:"Chilled creamy coffee blended with milk.",emoji:"🥤"},
+{id:"lemonade",name:"Fresh Lime Soda",price:69,cat:"Beverages",desc:"Fresh lime with chilled soda, available sweet or salted.",emoji:"🍋"},
+{id:"brownie",name:"Chocolate Brownie",price:129,cat:"Desserts",desc:"Rich chocolate brownie with a soft, fudgy centre.",emoji:"🍫"},
+{id:"icecream",name:"Vanilla Ice Cream",price:79,cat:"Desserts",desc:"Smooth and creamy classic vanilla ice cream.",emoji:"🍨"},
+{id:"gulab",name:"Gulab Jamun",price:89,cat:"Desserts",desc:"Soft milk-solid dumplings soaked in aromatic sugar syrup.",emoji:"🍮"}
+];
+let quantities={},category="All";
+const $=id=>document.getElementById(id);
+const categories=["All","South Indian","Continental","Chinese","North Indian","Biryani & Rice","Snacks","Beverages","Desserts"];
+const money=n=>"₹"+n.toLocaleString("en-IN");
+function total(){return dishes.reduce((sum,d)=>sum+d.price*(quantities[d.id]||0),0)}
+function itemCount(){return Object.values(quantities).reduce((a,b)=>a+b,0)}
+function categoryButtons(){$("categories").innerHTML=categories.map(c=>`<button class="cat ${c===category?"active":""}" onclick="setCategory('${c}')">${c}</button>`).join("")}
+function placeholder(d){return `<div class="photo-placeholder" role="img" aria-label="${d.name} illustration">${d.emoji}</div>`}
+function dishCard(d){const q=quantities[d.id]||0;return `<article class="dish"><div class="dish-photo">${d.img?`<img src="${d.img}" alt="${d.name}" loading="lazy" onerror="this.outerHTML=placeholder(d)">`:placeholder(d)}${d.tag?`<span class="tag">✦ ${d.tag}</span>`:""}</div><div class="dish-body"><div class="dish-title-row"><h3><span class="veg-dot" aria-label="vegetarian"></span>${d.name}</h3><span class="price">${money(d.price)}</span></div><p class="dish-desc">${d.desc}</p><div class="dish-foot"><button class="details" onclick="showDetails('${d.id}')">Dish details ↗</button>${q?`<div class="stepper"><button onclick="changeQty('${d.id}',-1)" aria-label="Remove one">−</button><b>${q}</b><button onclick="changeQty('${d.id}',1)" aria-label="Add one">+</button></div>`:`<button class="add" onclick="changeQty('${d.id}',1)">+ Add</button>`}</div></div></article>`}
+function render(){categoryButtons();const term=$("search").value.trim().toLowerCase();const shown=dishes.filter(d=>(category==="All"||d.cat===category)&&(!term||(d.name+" "+d.desc+" "+d.cat).toLowerCase().includes(term)));$("sectionTitle").textContent=term?"Search results":category==="All"?"All-time favourites":category;$("dishCount").textContent=shown.length+" dishes";$("dishGrid").innerHTML=shown.length?shown.map(dishCard).join(""):`<div class="empty"><strong>No dishes found</strong>Try another search or choose a different category.</div>`;updateCart()}
+function changeQty(id,delta){quantities[id]=Math.max(0,(quantities[id]||0)+delta);if(!quantities[id])delete quantities[id];render()}
+function setCategory(c){category=c;render()}
+function updateCart(){const n=itemCount(),t=total();$("navCount").textContent=n;$("bottomCart").style.display=n&&$("menuView").classList.contains("active")?"block":"none";$("cartLabel").textContent=`View cart · ${n} item${n===1?"":"s"}`;$("cartAmount").textContent=money(t)+" →"}
+function showView(name){["menu","checkout","success"].forEach(v=>$(v+"View").classList.toggle("active",v===name));window.scrollTo({top:0,behavior:"smooth"});updateCart()}
+function goCheckout(){if(!itemCount())return;buildCheckout();showView("checkout")}
+function buildCheckout(){$("orderItems").innerHTML=dishes.filter(d=>quantities[d.id]).map(d=>`<div class="order-row"><span>${d.name}<small>${money(d.price)} × ${quantities[d.id]}</small></span><strong>${money(d.price*quantities[d.id])}</strong></div>`).join("");$("orderTotal").textContent=money(total())}
+function showDetails(id){const d=dishes.find(x=>x.id===id);$("modalTitle").textContent=d.name;$("modalDesc").textContent=d.desc;$("modalPrice").textContent=money(d.price);$("modalAdd").onclick=()=>{changeQty(id,1);closeModal()};$("dishModal").classList.add("open")}
+function closeModal(){$("dishModal").classList.remove("open")}
+function placeOrder(){if(!itemCount())return;const method=document.querySelector('input[name="payment"]:checked').value;const token="DT-"+String(Date.now()).slice(-6);const record={id:token,customer:$("guestName").value.trim()||"Guest",table:$("tableNo").value.trim(),items:dishes.filter(d=>quantities[d.id]).map(d=>({id:d.id,name:d.name,qty:quantities[d.id],price:d.price})),total:total(),payment:method==="online"?"Online payment preview":"Pay at counter",status:"New",createdAt:new Date().toISOString()};try{const old=JSON.parse(localStorage.getItem("deccan_demo_orders")||"[]");old.unshift(record);localStorage.setItem("deccan_demo_orders",JSON.stringify(old))}catch(e){}$("orderToken").textContent="#"+token;$("successMessage").textContent=method==="online"?"Thanks "+record.customer+"! This online checkout preview did not take a payment.":"Thanks "+record.customer+"! Your demo order has been recorded on this device.";showView("success")}
+function resetMenu(){quantities={};category="All";$("search").value="";$("guestName").value="";$("tableNo").value="";showView("menu");render()}
+render();
+</script>
+</body>
+</html>

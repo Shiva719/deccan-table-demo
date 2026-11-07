@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17131f">
+<title>Play While You Wait | The Deccan Table</title>
+<style>
+:root{
+  --ink:#211b2b;--muted:#777080;--paper:#fbf8f2;--card:#fffefa;
+  --plum:#211a2c;--plum2:#33263e;--gold:#e8b968;--gold2:#f6d99e;
+  --line:#e9e1d7;--mint:#dff2e7;--green:#276344;--rose:#f8e8e5;
+  --shadow:0 18px 50px rgba(39,27,45,.09)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#eee9e2;color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,a{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid #5b9cf3;outline-offset:3px}
+.app{max-width:1100px;min-height:100dvh;margin:auto;background:var(--paper);box-shadow:0 0 70px #241b2c14;overflow:hidden}
+.topbar{background:var(--plum);color:#fff;padding:17px clamp(18px,4vw,42px);display:flex;align-items:center;gap:14px}
+.logo{width:48px;height:48px;border:1px solid #c99a53;border-radius:16px;display:grid;place-items:center;color:var(--gold);font-size:25px;background:#ffffff08}
+.brand{font:700 17px Georgia,serif;letter-spacing:1.4px}
+.tagline{font-size:10px;letter-spacing:2px;color:#d8bb91;margin-top:3px}
+.top-link{margin-left:auto;color:#f2d7a8;text-decoration:none;font-size:13px;font-weight:700;padding:9px 12px;border:1px solid #ffffff2b;border-radius:999px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(115deg,#211a2c 0%,#382841 60%,#604632 100%);color:#fff;padding:clamp(26px,5vw,52px) clamp(18px,4vw,42px) 35px}
+.hero:after{content:"✦";position:absolute;right:7%;top:-42px;font-size:210px;color:#ffffff09;transform:rotate(12deg);pointer-events:none}
+.hero-kicker{color:var(--gold2);font-size:11px;font-weight:800;letter-spacing:2.3px;text-transform:uppercase}
+.hero h1{font:700 clamp(32px,5vw,51px)/1.08 Georgia,serif;max-width:650px;margin:10px 0 12px}
+.hero p{color:#e5dce7;max-width:560px;margin:0;font-size:14px}
+.hero-chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+.hero-chip{border:1px solid #ffffff30;background:#ffffff0d;color:#f8e9ce;border-radius:99px;padding:7px 11px;font-size:11px}
+.content{padding:clamp(17px,3.5vw,36px)}
+.order-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(17px,3vw,25px);box-shadow:var(--shadow)}
+.order-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.eyebrow{font-size:10px;letter-spacing:1.7px;font-weight:850;color:var(--muted)}
+.order-id{font:700 25px Georgia,serif;margin:3px 0 0}
+.status-pill{background:#f8ecd6;color:#78501b;border-radius:99px;padding:8px 13px;font-size:12px;font-weight:850}
+.status-pill.ready{background:var(--mint);color:var(--green)}
+.progress{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:24px 0 13px;position:relative}
+.progress:before{content:"";height:3px;background:#eee8df;position:absolute;top:16px;left:13%;right:13%;z-index:0}
+.progress-step{position:relative;z-index:1;text-align:center;color:#9b929d;font-size:11px;font-weight:700}
+.progress-dot{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;margin:0 auto 7px;background:#eee9e3;color:#847b85;border:3px solid var(--card);font-weight:900}
+.progress-step.done{color:var(--ink)}
+.progress-step.done .progress-dot{background:var(--plum);color:#fff}
+.order-note{font-size:13px;color:var(--muted);margin:10px 0 0}
+.ready-banner{display:none;margin-top:16px;border-radius:15px;background:var(--mint);color:var(--green);padding:14px 16px;font-weight:800}
+.ready-banner.show{display:block}
+.demo-controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:13px;padding:12px 16px;min-height:44px;background:var(--plum);color:#fff;font-weight:800;transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.btn.gold{background:var(--gold);color:#352617}
+.btn.soft{background:#f1ece5;color:#4d4352}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.demo-hint{font-size:11px;color:#9a9098;margin:10px 0 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:34px 0 16px}
+.section-head h2{font:700 clamp(25px,4vw,34px) Georgia,serif;margin:0}
+.section-head p{color:var(--muted);font-size:13px;margin:5px 0 0}
+.time-badge{white-space:nowrap;border-radius:99px;background:#f3e8d8;color:#76542c;padding:7px 11px;font-size:11px;font-weight:800}
+.game-layout{display:grid;grid-template-columns: minmax(230px,.72fr) minmax(0,1.5fr);gap:16px;align-items:start}
+.game-picker{display:grid;gap:10px}
+.game-choice{display:flex;align-items:center;gap:13px;text-align:left;width:100%;padding:15px;border:1.5px solid var(--line);border-radius:18px;background:var(--card);color:var(--ink);transition:.18s}
+.game-choice:hover{border-color:#c5a16d;transform:translateY(-1px)}
+.game-choice.active{border-color:#a8793d;background:#fff5e5;box-shadow:0 7px 20px #6d4b1a10}
+.game-icon{width:47px;height:47px;flex:0 0 47px;border-radius:15px;background:#f3e9dc;display:grid;place-items:center;font-size:25px}
+.game-choice strong{display:block;font-size:14px}
+.game-choice small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.game-choice .arrow{margin-left:auto;color:#9a7b52;font-size:19px}
+.game-panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(16px,3vw,24px);min-height:405px;box-shadow:0 8px 25px #241b2c08}
+.game-panel.hidden{display:none}
+.game-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.game-title{font:700 19px Georgia,serif}
+.score{border-radius:99px;background:#f3eee8;padding:7px 11px;font-size:11px;font-weight:850;color:#62566a;white-space:nowrap}
+.game-instructions{font-size:12px;color:var(--muted);margin:0 0 15px}
+.memory-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;max-width:440px;margin:16px auto}
+.memory-tile{aspect-ratio:1;border:1.5px solid #e5d2b8;border-radius:15px;background:linear-gradient(145deg,#eee0cd,#e4d0b6);color:#493442;font-size:clamp(23px,4vw,34px);display:grid;place-items:center;box-shadow:inset 0 1px #fff8;transition:transform .15s,background .15s}
+.memory-tile:not(:disabled):hover{transform:translateY(-2px)}
+.memory-tile.revealed{background:#fff8ed}
+.memory-tile.matched{background:#e1f1e5;border-color:#8fbea0}
+.feedback{min-height:28px;text-align:center;font-size:13px;font-weight:800;margin:12px 0;color:#60442d}
+.game-actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:min(100%,330px);margin:20px auto}
+.cell{aspect-ratio:1;border:1.5px solid #e5d6c5;border-radius:17px;background:#fbf5ec;color:#46354b;font-size:clamp(32px,7vw,48px);font-weight:850}
+.cell.o{color:#397b68}
+.cell:disabled{cursor:default}
+.tic-meta{text-align:center;font-size:12px;color:var(--muted)}
+.tap-zone{max-width:440px;margin:20px auto 12px;min-height:190px;border:0;border-radius:22px;width:100%;background:#eee8e1;color:#6c6270;font-size:17px;font-weight:850;display:grid;place-items:center;padding:20px;text-align:center}
+.tap-zone.waiting{background:#f7e7ca;color:#7c541c}
+.tap-zone.go{background:#dff2e7;color:#21613f}
+.tap-zone.done{background:#eee8f5;color:#4f3b62}
+.tap-score{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.tap-score strong{color:var(--ink)}
+.footer{padding:22px 18px 30px;text-align:center;color:#938995;font-size:11px}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(20px);background:#211a2c;color:#fff;padding:11px 16px;border-radius:99px;font-size:12px;font-weight:800;opacity:0;pointer-events:none;transition:.2s;z-index:5}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:720px){.game-layout{grid-template-columns:1fr}.game-picker{grid-template-columns:repeat(3,minmax(0,1fr))}.game-choice{display:flex;flex-direction:column;text-align:center;padding:12px 7px;gap:7px}.game-choice small{font-size:10px}.game-choice .arrow{display:none}.game-icon{width:42px;height:42px;flex-basis:42px}.game-panel{min-height:370px}}
+@media(max-width:430px){.topbar{padding:13px 15px}.logo{width:42px;height:42px}.brand{font-size:15px}.top-link{font-size:11px;padding:8px 10px}.hero{padding-top:28px}.progress{gap:2px}.order-card{border-radius:19px}.demo-controls .btn{flex:1;padding:10px 11px;font-size:12px}.game-picker{gap:7px}.game-choice strong{font-size:11px}.game-choice small{font-size:9px}.game-panel{padding:14px}.memory-grid{gap:7px}.memory-tile{border-radius:11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Rewards club */
+.rewards-card{position:relative;overflow:hidden;margin-top:17px;padding:clamp(18px,3vw,25px);border-radius:24px;color:#fff;background:radial-gradient(circle at 92% 8%,#a8783d55 0,transparent 34%),linear-gradient(120deg,#211a2c,#40304a 68%,#654a35);box-shadow:0 16px 38px #281c301f}
+.rewards-card:after{content:"✦";position:absolute;right:20px;bottom:-55px;font-size:180px;line-height:1;color:#ffffff08;pointer-events:none}
+.rewards-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;position:relative;z-index:1}
+.rewards-kicker{font-size:10px;letter-spacing:2px;color:#f3d39d;font-weight:900}
+.rewards-title{font:700 clamp(22px,3.5vw,29px) Georgia,serif;margin:5px 0}
+.rewards-copy{font-size:12px;color:#e1d6e5;max-width:440px;margin:0}
+.reward-stamp{width:48px;height:48px;flex:0 0 48px;border:1px solid #e8bd75;border-radius:16px;display:grid;place-items:center;color:#f2c77e;font-size:25px;background:#ffffff0b}
+.points-row{display:flex;align-items:end;gap:8px;margin:22px 0 13px;position:relative;z-index:1}
+.points-number{font:700 clamp(38px,7vw,54px)/.95 Georgia,serif;color:#ffdfa5}
+.points-label{font-size:11px;color:#e8dce8;padding-bottom:5px}
+.reward-track{height:11px;border-radius:99px;background:#ffffff25;overflow:hidden;position:relative;z-index:1}
+.reward-fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,#e6b45f,#ffe2a7);transition:width .3s ease}
+.reward-progress-copy{display:flex;justify-content:space-between;gap:10px;color:#e8dce8;font-size:11px;margin-top:8px;position:relative;z-index:1}
+.reward-perks{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px;position:relative;z-index:1}
+.reward-perk{border:1px solid #ffffff30;background:#ffffff0d;color:#f7e8ce;border-radius:99px;padding:7px 10px;font-size:11px}
+.reward-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px;position:relative;z-index:1}
+.reward-actions .btn{flex:1}
+.reward-message{min-height:20px;margin:12px 0 0;color:#f6dcae;font-size:12px;font-weight:750;position:relative;z-index:1}
+.reward-voucher{display:none;margin-top:13px;padding:12px 14px;border-radius:14px;background:#e1f3e7;color:#245b3b;font-size:12px;font-weight:800}
+.reward-voucher.show{display:block}
+.reward-terms{font-size:10px;color:#c9bdcd;margin:12px 0 0;position:relative;z-index:1}
+@media(max-width:430px){.rewards-card{border-radius:19px}.reward-actions .btn{font-size:12px;padding:11px 10px}}
+
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="topbar">
+    <div class="logo" aria-hidden="true">♨</div>
+    <div><div class="brand">THE DECCAN TABLE</div><div class="tagline">A LITTLE JOY WITH EVERY ORDER</div></div>
+    <a class="top-link" href="qr_menu_mobile_demo.html">← Back to menu</a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-kicker">Your table-side playground</div>
+    <h1>Good food takes time.<br>Good fun doesn’t.</h1>
+    <p>Your order is on its way. Pick a quick game, challenge yourself, and we’ll keep your order progress right here.</p>
+    <div class="hero-chips"><span class="hero-chip">✦ Quick mini-games</span><span class="hero-chip">✦ No sign-in needed</span><span class="hero-chip">✦ Just for fun</span></div>
+  </section>
+
+  <div class="content">
+    <section class="order-card" aria-labelledby="orderHeading">
+      <div class="order-head">
+        <div><div class="eyebrow" id="orderHeading">ORDER IN PROGRESS</div><div class="order-id" id="orderId">#A102</div></div>
+        <span class="status-pill" id="statusPill" role="status">Preparing</span>
+      </div>
+      <div class="progress" aria-label="Order progress">
+        <div class="progress-step done" id="step0"><span class="progress-dot">✓</span>Order placed</div>
+        <div class="progress-step done" id="step1"><span class="progress-dot">2</span>Preparing</div>
+        <div class="progress-step" id="step2"><span class="progress-dot">3</span>Ready to collect</div>
+      </div>
+      <p class="order-note" id="orderNote">Your food is being prepared. Settle in and enjoy a quick game!</p>
+      <div class="ready-banner" id="readyBanner" role="status" aria-live="polite">🔔 Your order is ready! Please collect it at the counter.</div>
+      <div class="demo-controls">
+        <button class="btn gold" id="simulateReady" type="button">🔔 Simulate order ready</button>
+        <button class="btn soft" id="resetStatus" type="button">Reset demo status</button>
+      </div>
+      <p class="demo-hint">Demo controls only. In a connected setup, your vendor dashboard can update this status.</p>
+    </section>
+
+
+    <section class="rewards-card" aria-labelledby="rewardsTitle">
+      <div class="rewards-head">
+        <div>
+          <div class="rewards-kicker">✦ THE DECCAN TABLE REWARDS CLUB</div>
+          <h2 class="rewards-title" id="rewardsTitle">Little treats. Lovely rewards.</h2>
+          <p class="rewards-copy">Every visit brings you closer to something delicious. Collect points today and unlock a treat for your next order.</p>
+        </div>
+        <div class="reward-stamp" aria-hidden="true">♛</div>
+      </div>
+      <div class="points-row"><div class="points-number" id="rewardPoints">0</div><div class="points-label">POINTS IN YOUR WALLET</div></div>
+      <div class="reward-track" role="progressbar" aria-label="Progress towards next reward" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="rewardProgress"><div class="reward-fill" id="rewardFill"></div></div>
+      <div class="reward-progress-copy"><span id="rewardProgressText">100 points to your first reward</span><span>100 pts = ₹50 off</span></div>
+      <div class="reward-perks"><span class="reward-perk">🎁 50 welcome points</span><span class="reward-perk">✨ Save points for your next visit</span></div>
+      <div class="reward-actions">
+        <button type="button" class="btn gold" id="claimPoints">Collect 50 points</button>
+        <button type="button" class="btn soft" id="redeemPoints">Unlock ₹50 next-order reward</button>
+      </div>
+      <div class="reward-message" id="rewardMessage" role="status" aria-live="polite">Your rewards journey starts here. Claim your demo points when your order is ready!</div>
+      <div class="reward-voucher" id="rewardVoucher" role="status" aria-live="polite"></div>
+      <p class="reward-terms">Demo loyalty wallet: points and voucher are saved on this device. The ₹50 reward is a sample offer, not a live discount until connected to the restaurant ordering system.</p>
+    </section>
+
+    <div class="section-head">
+      <div><h2>Choose your little break</h2><p>Three tiny challenges. One delicious way to pass the time.</p></div>
+      <span class="time-badge">⏱ 1–3 MIN</span>
+    </div>
+
+    <div class="game-layout">
+      <nav class="game-picker" aria-label="Choose a mini-game">
+        <button type="button" class="game-choice active" id="pickMemory" aria-pressed="true">
+          <span class="game-icon">🍕</span><span><strong>Food Match</strong><small>Find the pairs</small></span><span class="arrow">›</span>
+        </button>
+        <button type="button" class="game-choice" id="pickTic" aria-pressed="false">
+          <span class="game-icon">⭕</span><span><strong>Tic-Tac-Toe</strong><small>Beat the bot</small></span><span class="arrow">›</span>
+        </button>
+        <button type="button" class="game-choice" id="pickTap" aria-pressed="false">
+          <span class="game-icon">⚡</span><span><strong>Quick Reflex</strong><small>Test your speed</small></span><span class="arrow">›</span>
+        </button>
+      </nav>
+
+      <section class="game-panel" id="memoryPanel">
+        <div class="game-top"><div class="game-title">🍔 Food Memory Match</div><span class="score" id="moves">MOVES · 0</span></div>
+        <p class="game-instructions">Flip two tiles at a time. Remember where each treat is hiding and match all six pairs.</p>
+        <div class="memory-grid" id="memoryGrid" aria-label="Food memory matching game"></div>
+        <div class="feedback" id="memoryFeedback" aria-live="polite">Ready, set, match!</div>
+        <div class="game-actions"><button type="button" class="btn" id="resetMemory">↻ Shuffle & play again</button></div>
+      </section>
+
+      <section class="game-panel hidden" id="ticPanel">
+        <div class="game-top"><div class="game-title">⭕ Tic-Tac-Toe</div><span class="score" id="ticWins">YOUR WINS · 0</span></div>
+        <p class="game-instructions">You are X. The computer is O. Make a line of three before the bot does!</p>
+        <div class="board" id="ticBoard" aria-label="Tic-Tac-Toe board"></div>
+        <div class="feedback" id="ticFeedback" aria-live="polite">Your turn — choose a square.</div>
+        <div class="game-actions"><button type="button" class="btn" id="resetTic">↻ New round</button></div>
+      </section>
+
+      <section class="game-panel hidden" id="tapPanel">
+        <div class="game-top"><div class="game-title">⚡ Quick Reflex</div><span class="score" id="bestReaction">BEST · —</span></div>
+        <p class="game-instructions">Tap start, wait for the panel to turn green, then tap as fast as you can. Don’t jump the signal!</p>
+        <button class="tap-zone" id="tapZone" type="button">Tap “Start challenge” when you’re ready</button>
+        <div class="tap-score"><span>Last: <strong id="lastReaction">—</strong></span><span>Average: <strong id="avgReaction">—</strong></span></div>
+        <div class="feedback" id="tapFeedback" aria-live="polite">Can you beat your best time?</div>
+        <div class="game-actions"><button type="button" class="btn" id="startTap">Start challenge</button><button type="button" class="btn soft" id="resetTap">Reset</button></div>
+      </section>
+    </div>
+  </div>
+  <footer class="footer">Made for the moments between ordering and the first bite · Demo only — no real orders, payments or prizes</footer>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+let status='Preparing', latest=null;
+try{
+  const orders=JSON.parse(localStorage.getItem('deccan_demo_orders')||'[]');
+  latest=orders[0]||null;
+  if(latest){$('orderId').textContent='#'+latest.id;status=['Ready','Completed'].includes(latest.status)?'Ready':'Preparing';}
+}catch(e){}
+function updateStatus(){
+  const ready=status==='Ready';
+  $('statusPill').textContent=status;
+  $('statusPill').classList.toggle('ready',ready);
+  $('step2').classList.toggle('done',ready);
+  $('step2').querySelector('.progress-dot').textContent=ready?'✓':'3';
+  $('readyBanner').classList.toggle('show',ready);
+  $('orderNote').textContent=ready?'Your food is ready for pickup. Finish your game or collect it now!':'Your food is being prepared. Settle in and enjoy a quick game!';
+}
+function setStatus(value){status=value;updateStatus();if(typeof renderRewards==='function')renderRewards();}
+$('simulateReady').addEventListener('click',()=>{setStatus('Ready');showToast('Order marked ready in this demo');});
+$('resetStatus').addEventListener('click',()=>{setStatus('Preparing');showToast('Demo status reset');});
+updateStatus();
+
+function showToast(message){
+  const el=$('toast');el.textContent=message;el.classList.add('show');
+  clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>el.classList.remove('show'),1900);
+}
+
+// Rewards wallet: demo points persist on this device and are linked to an order ID.
+const REWARD_KEY='deccan_rewards_wallet_v1';
+const REWARD_COST=100;
+const REWARD_VALUE=50;
+let rewardWallet={points:0,claimedOrders:[],voucher:null};
+try{
+  const saved=JSON.parse(localStorage.getItem(REWARD_KEY)||'null');
+  if(saved&&typeof saved==='object'){
+    rewardWallet.points=Math.max(0,Number(saved.points)||0);
+    rewardWallet.claimedOrders=Array.isArray(saved.claimedOrders)?saved.claimedOrders:[];
+    rewardWallet.voucher=saved.voucher||null;
+  }
+}catch(error){}
+function saveRewards(){
+  try{localStorage.setItem(REWARD_KEY,JSON.stringify(rewardWallet));}catch(error){}
+}
+function renderRewards(){
+  const points=rewardWallet.points;
+  $('rewardPoints').textContent=points.toLocaleString('en-IN');
+  const progress=Math.min(100,(points%REWARD_COST)/REWARD_COST*100);
+  $('rewardFill').style.width=progress+'%';
+  $('rewardProgress').setAttribute('aria-valuenow',String(Math.round(progress)));
+  const remaining=REWARD_COST-(points%REWARD_COST);
+  $('rewardProgressText').textContent=points>=REWARD_COST
+    ?(points%REWARD_COST)+' points after your latest reward'
+    :remaining+' points to your first reward';
+  const orderKey=latest&&latest.id?String(latest.id):'A102';
+  const alreadyClaimed=rewardWallet.claimedOrders.includes(orderKey);
+  $('claimPoints').disabled=alreadyClaimed;
+  $('claimPoints').textContent=alreadyClaimed?'✓ Points collected':'Collect 50 points';
+  $('claimPoints').title=alreadyClaimed?'Points have already been collected for this demo order':'Collect points once this order is ready';
+  $('redeemPoints').disabled=points<REWARD_COST||!!rewardWallet.voucher;
+  $('redeemPoints').textContent=rewardWallet.voucher?'✓ Reward unlocked':'Unlock ₹50 next-order reward';
+  if(rewardWallet.voucher){
+    $('rewardVoucher').classList.add('show');
+    $('rewardVoucher').textContent='🎉 Your next-order reward is ready: ₹50 OFF · Demo voucher '+rewardWallet.voucher.code+'. Keep it for your next visit!';
+  }else{
+    $('rewardVoucher').classList.remove('show');
+    $('rewardVoucher').textContent='';
+  }
+}
+$('claimPoints').addEventListener('click',()=>{
+  if(status!=='Ready'){
+    $('rewardMessage').textContent='Your points unlock when the order is marked ready. Keep playing while you wait!';
+    return;
+  }
+  const orderKey=latest&&latest.id?String(latest.id):'A102';
+  if(rewardWallet.claimedOrders.includes(orderKey)){
+    $('rewardMessage').textContent='You have already collected points for this order. Enjoy your rewards!';
+    return;
+  }
+  rewardWallet.points+=50;
+  rewardWallet.claimedOrders.push(orderKey);
+  saveRewards();renderRewards();
+  $('rewardMessage').textContent='✨ 50 points added! Your next delicious reward is getting closer.';
+  showToast('+50 reward points added!');
+});
+$('redeemPoints').addEventListener('click',()=>{
+  if(rewardWallet.voucher||rewardWallet.points<REWARD_COST)return;
+  rewardWallet.points-=REWARD_COST;
+  const code='DECCAN'+Math.random().toString(36).slice(2,6).toUpperCase();
+  rewardWallet.voucher={code,value:REWARD_VALUE,createdAt:new Date().toISOString()};
+  saveRewards();renderRewards();
+  $('rewardMessage').textContent='Your reward is unlocked. It is saved in this demo wallet for your next order!';
+  showToast('Your ₹50 next-order reward is unlocked!');
+});
+
+const gameIds=['memory','tic','tap'];
+function selectGame(game){
+  gameIds.forEach(id=>{
+    $(id+'Panel').classList.toggle('hidden',id!==game);
+    const button=$('pick'+id[0].toUpperCase()+id.slice(1));
+    button.classList.toggle('active',id===game);
+    button.setAttribute('aria-pressed',String(id===game));
+  });
+}
+$('pickMemory').addEventListener('click',()=>selectGame('memory'));
+$('pickTic').addEventListener('click',()=>selectGame('tic'));
+$('pickTap').addEventListener('click',()=>selectGame('tap'));
+
+// Food memory game
+const symbols=['🍕','🍔','🍟','🍩','🥗','🍜'];
+let deck=[],flipped=[],matched=new Set(),moves=0,locked=false,flipTimer=null;
+function resetMemory(){
+  clearTimeout(flipTimer);
+  deck=[...symbols,...symbols].map((s,i)=>({s,id:i}));
+  for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
+  flipped=[];matched=new Set();moves=0;locked=false;
+  $('memoryFeedback').textContent='Ready, set, match!';
+  drawMemory();
+}
+function drawMemory(){
+  $('moves').textContent='MOVES · '+moves;
+  $('memoryGrid').innerHTML='';
+  deck.forEach((card,i)=>{
+    const revealed=flipped.includes(i)||matched.has(i),b=document.createElement('button');
+    b.type='button';b.className='memory-tile'+(revealed?' revealed':'')+(matched.has(i)?' matched':'');
+    b.textContent=revealed?card.s:'?';
+    b.setAttribute('aria-label',revealed?'Food '+card.s:'Hidden tile '+(i+1));
+    b.disabled=locked||revealed;b.addEventListener('click',()=>flip(i));
+    $('memoryGrid').appendChild(b);
+  });
+}
+function flip(i){
+  if(locked||flipped.includes(i)||matched.has(i))return;
+  flipped.push(i);drawMemory();
+  if(flipped.length===2){
+    moves++;const [a,b]=flipped;
+    if(deck[a].s===deck[b].s){
+      matched.add(a);matched.add(b);flipped=[];
+      $('memoryFeedback').textContent=matched.size===deck.length?'🎉 Brilliant! All six pairs in '+moves+' moves!':'✨ Match found! Keep going.';
+      drawMemory();
+    }else{
+      locked=true;$('memoryFeedback').textContent='Not quite — remember those spots!';
+      flipTimer=setTimeout(()=>{flipped=[];locked=false;drawMemory();},850);
+    }
+  }
+}
+$('resetMemory').addEventListener('click',resetMemory);resetMemory();
+
+// Tic-Tac-Toe
+let tic=Array(9).fill(''),wins=0;
+const combos=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+function outcome(board){
+  for(const [a,b,c] of combos)if(board[a]&&board[a]===board[b]&&board[b]===board[c])return board[a];
+  return board.every(Boolean)?'draw':null;
+}
+function drawTic(){
+  $('ticWins').textContent='YOUR WINS · '+wins;
+  $('ticBoard').innerHTML='';const result=outcome(tic);
+  tic.forEach((value,i)=>{
+    const b=document.createElement('button');b.type='button';
+    b.className='cell'+(value==='O'?' o':'');b.textContent=value;
+    b.setAttribute('aria-label','Square '+(i+1)+(value?' '+value:''));
+    b.disabled=!!value||!!result;b.addEventListener('click',()=>move(i));
+    $('ticBoard').appendChild(b);
+  });
+  $('ticFeedback').textContent=result==='X'?'🎉 You won this round!':result==='O'?'The computer got you. Try again!':result==='draw'?"It's a draw — well played!":'Your turn — choose a square.';
+}
+function move(i){
+  if(tic[i]||outcome(tic))return;
+  tic[i]='X';
+  if(outcome(tic)==='X'){wins++;drawTic();return;}
+  if(!outcome(tic)){
+    const empty=tic.map((v,j)=>v?-1:j).filter(j=>j>=0);
+    let pick=empty.find(j=>{const b=[...tic];b[j]='O';return outcome(b)==='O';});
+    if(pick===undefined)pick=empty.find(j=>{const b=[...tic];b[j]='X';return outcome(b)==='X';});
+    if(pick===undefined)pick=empty.includes(4)?4:empty[Math.floor(Math.random()*empty.length)];
+    if(pick!==undefined)tic[pick]='O';
+  }
+  drawTic();
+}
+function resetTic(){tic=Array(9).fill('');drawTic();}
+$('resetTic').addEventListener('click',resetTic);resetTic();
+
+// Quick reflex challenge
+let tapState='idle',startTimer=null,goAt=0,reactions=[],best=null;
+function formatMs(value){return value+' ms';}
+function updateTapStats(){
+  $('bestReaction').textContent='BEST · '+(best===null?'—':formatMs(best));
+  $('lastReaction').textContent=reactions.length?formatMs(reactions[reactions.length-1]):'—';
+  const average=reactions.length?Math.round(reactions.reduce((a,b)=>a+b,0)/reactions.length):null;
+  $('avgReaction').textContent=average===null?'—':formatMs(average);
+}
+function clearTapTimer(){clearTimeout(startTimer);startTimer=null;}
+function resetTap(){
+  clearTapTimer();tapState='idle';$('tapZone').className='tap-zone';
+  $('tapZone').textContent='Tap “Start challenge” when you’re ready';
+  $('tapFeedback').textContent='Can you beat your best time?';
+}
+function startChallenge(){
+  clearTapTimer();tapState='waiting';$('tapZone').className='tap-zone waiting';
+  $('tapZone').textContent='Wait for GREEN…';
+  $('tapFeedback').textContent='Stay sharp. Don’t tap too early!';
+  startTimer=setTimeout(()=>{
+    tapState='go';goAt=performance.now();$('tapZone').className='tap-zone go';
+    $('tapZone').textContent='TAP NOW!';
+  },1200+Math.random()*2400);
+}
+$('tapZone').addEventListener('click',()=>{
+  if(tapState==='waiting'){
+    clearTapTimer();tapState='early';$('tapZone').className='tap-zone done';
+    $('tapZone').textContent='Too soon!';$('tapFeedback').textContent='Wait until the panel turns green.';return;
+  }
+  if(tapState==='go'){
+    const result=Math.round(performance.now()-goAt);reactions.push(result);
+    if(best===null||result<best)best=result;
+    tapState='done';$('tapZone').className='tap-zone done';
+    $('tapZone').textContent='⚡ '+formatMs(result);
+    $('tapFeedback').textContent=result<250?'Lightning fast!':result<350?'Great reflexes!':'Nice try — can you go faster?';
+    updateTapStats();
+  }else if(tapState==='idle'||tapState==='early'||tapState==='done'){
+    $('tapFeedback').textContent='Press “Start challenge” for another round.';
+  }
+});
+$('startTap').addEventListener('click',startChallenge);
+$('resetTap').addEventListener('click',()=>{reactions=[];best=null;updateTapStats();resetTap();});
+updateTapStats();
+renderRewards();
+
+// Reflect the latest demo order when the vendor dashboard changes it in another tab.
+window.addEventListener('storage',event=>{
+  if(event.key!=='deccan_demo_orders')return;
+  try{
+    const orders=JSON.parse(event.newValue||'[]');
+    const order=latest?orders.find(o=>o.id===latest.id):orders[0];
+    if(order){
+      latest=order;$('orderId').textContent='#'+order.id;
+      setStatus(['Ready','Completed'].includes(order.status)?'Ready':'Preparing');
+    }
+  }catch(error){}
+});
+</script>
+</body>
+</html>
